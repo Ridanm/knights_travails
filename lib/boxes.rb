@@ -16,7 +16,7 @@ module Boxes
   end
 
   def cyan_dot 
-    " \u2022 ".light_cyan
+    " \u2022 ".cyan
   end
 end
 
