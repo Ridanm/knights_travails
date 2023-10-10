@@ -8,27 +8,25 @@ board = Board.new
 knight = Knight.new
 path_for = SearchMoves.new
 
-k_black = knight.black
-red_dot = board.red_dot
-cyan_dot = board.cyan_dot 
+moves = path_for.knight_moves([1, 4], [4, 7])
+puts "\nknight_moves([1, 4], [4, 7]): "
+puts "=> You made it in #{moves.size-1} moves!  Here's your path: #{moves}"
 
-board.update_square('a', 1).change_piece = cyan_dot
-d4 = board.update_square('d', 4)
-e2 = board.update_square('e', 2)
-h8 = board.update_square('h', 8)
-
-# a1.change_piece = cyan_dot 
-d4.change_piece = k_black
-e2.change_piece = red_dot
-h8.change_piece = red_dot
-
+puts "\nUpdate Board from ['d', 1] =>#{knight.white} to ['g', 4] =>#{board.cyan_dot}...\n\n"
+board.update_square('d', 1).change_piece = knight.black 
+board.update_square('e',3).change_piece = board.red_dot
+board.update_square('g', 4).change_piece = board.cyan_dot
 board.show
 
-moves = path_for.knight_moves([1, 4], [4, 7])
-puts "\n=> You made it in #{moves.size-1} moves!  Here's your path: #{moves}"
 
-puts "\nUpdate Board..."
+board.create_board # reset board 
+moves_two = path_for.knight_moves([3, 3], [4, 3])
+puts "\nknight_moves([3, 3],[4, 3])"
+puts "=> YOu made it in #{moves_two.size-1} moves!  Here's your path: #{moves_two}"
 
-
-
-
+puts "\nUpdate Board form knight_moves(['d', 3] =>#{knight.white}, ['d', 4] =>#{board.cyan_dot})\n\n"
+board.update_square('d', 3).change_piece = knight.black 
+board.update_square('e', 5).change_piece = board.red_dot 
+board.update_square('f', 3).change_piece = board.red_dot 
+board.update_square('d', 4).change_piece = board.cyan_dot 
+board.show 
