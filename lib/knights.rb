@@ -11,8 +11,6 @@ class Knight
     " \u265E ".black
   end
 
-  # https://www.techiedelight.com/chess-knight-problem-find-shortest-path-source-destination/ 
-
   def is_valid?(row, column) 
     (row.between?(1, 8)) && (column.between?(0, 7))
   end

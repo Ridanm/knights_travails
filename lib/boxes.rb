@@ -15,8 +15,8 @@ module Boxes
     " \u2022 ".red 
   end
 
-  def cyan_dot 
-    " \u2022 ".cyan
+  def blue_dot 
+    " \u2022 ".light_blue
   end
 end
 
