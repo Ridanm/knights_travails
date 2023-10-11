@@ -39,6 +39,10 @@ class Board
     Boxes::BOARD[row][abc_h] 
   end
 
+  def you_made_it(moves)
+    puts "\n=> You made it in #{moves.size-1} moves!  Here's your path: #{moves}"
+  end
+
   def show_moves_path(path, piece)
     return if path.nil?
     start_row, start_column = path.shift 
