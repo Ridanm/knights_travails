@@ -51,23 +51,21 @@ class Board
     puts "\n  #{moves.yellow}\n\n"
     
     # first(column) second(row)
-    if path.size == 0 
+    if path.size == 0 # this is for no repeat, i prefer cut path 
       update_square(letter[start_column], start_row).change_piece = piece.black 
       update_square(letter[target_column], target_row).change_piece = blue_dot 
-      show()
     elsif path.size == 1  
       middle_row, middle_column = path[0] 
       update_square(letter[start_column], start_row).change_piece = piece.black 
       update_square(letter[middle_column], middle_row).change_piece = red_dot 
       update_square(letter[target_column], target_row).change_piece = blue_dot 
-      show()
     else 
       update_square(letter[start_column], start_row).change_piece = piece.black 
       path.each do |row, column| 
         update_square(letter[column], row).change_piece = red_dot 
       end 
       update_square(letter[target_column], target_row).change_piece = blue_dot
-      show()
     end
+    show()
   end
 end
