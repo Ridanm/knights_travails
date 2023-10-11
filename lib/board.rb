@@ -21,20 +21,49 @@ class Board
   end
 
   def show
-    # generar la misma cantidad de espacios con los números que tienen longitud 1
     space = proc { |elem| elem }
-    # mostrando el tablero con sus correspondientes espacios
-    BOARD.each do |row, col| # key value this is a hash 
+    BOARD.each do |row, col| 
       puts "#{row unless row == :let}  #{col.map(&space).join('') unless row == :let} "
     end 
-    # representando las letras del tablero 
     letters = -> (foot) { ' ' + foot }
+
     puts "   #{BOARD[:let].map(&letters).join(' ')}"
   end  
 
+  def letter
+    [*'a'..'h']
+  end
+
   def update_square(column, row)
-    letters = [*'a'..'h']
-    abc_h = letters.index(column) if letters.include?(column)
+    abc_h = letter.index(column) if letter.include?(column)
     Boxes::BOARD[row][abc_h] 
+  end
+
+  def show_moves_path(path, piece)
+    return if path.nil?
+    start_row, start_column = path.shift 
+    target_row, target_column = path.pop 
+    moves = "knight_moves([#{letter[start_column]}, #{start_row}],[#{letter[target_column]}, #{target_row}])"
+    puts "\n  #{moves.yellow}\n\n"
+    
+    # first(column) second(row)
+    if path.size == 0 
+      update_square(letter[start_column], start_row).change_piece = piece.black 
+      update_square(letter[target_column], target_row).change_piece = blue_dot 
+      show()
+    elsif path.size == 1  
+      middle_row, middle_column = path[0] 
+      update_square(letter[start_column], start_row).change_piece = piece.black 
+      update_square(letter[middle_column], middle_row).change_piece = red_dot 
+      update_square(letter[target_column], target_row).change_piece = blue_dot 
+      show()
+    else 
+      update_square(letter[start_column], start_row).change_piece = piece.black 
+      path.each do |row, column| 
+        update_square(letter[column], row).change_piece = red_dot 
+      end 
+      update_square(letter[target_column], target_row).change_piece = blue_dot
+      show()
+    end
   end
 end
