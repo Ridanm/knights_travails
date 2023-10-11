@@ -39,9 +39,9 @@ class SearchMoves
   end
 
   def knight_moves(start, target)
-    return puts "Incorrect Coordinates..." if !check_quadrant(start) || !check_quadrant(target)
+    return puts "Incorrect Coordinates...".light_red if !check_quadrant(start) || !check_quadrant(target)
     path = [start]
-    queue = [path]
+    queue = [path] 
 
     until queue.empty?
       current_path = queue.shift
